@@ -36,52 +36,57 @@ a:hover {
     background-color: #6ea78b;
 }
 
-nav {
-    position: sticky;
+    /* put the nav at the top with a colour */
+.nav {
+    position: relative;
     top: 0;
-    z-index: 1;
     background-color: #3f7a5d;
+    overflow: hidden;
 }
 
-nav > ul,
+    /* make the links into blocks */
+.nav a {
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 24px;
+}
+
+    /* hide the menu icon (wide screens) */
+.nav .icon {
+    display: none;
+}
+
 .articles {
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
 }
 
-    /* using flexbox for the navigation */
-nav > ul {
-    display: flex;
-}
-
-    /* list items equally sized */
-nav > ul > li {
-    flex: 1;
-}
-
-    /* inline-block to respect padding */
-nav > ul > li > a {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    padding-top: 24px;
-    padding-bottom: 24px;
-}
-
-    /* when <646px, wrap the list items onto new rows
-    to have them go full-sized
-    and with less padding on smaller screens */
+    /* when <646px, hide all links except the first one (paw)
+    and display the menu icon on the right */
 @media screen and (max-width: 646px) {
-    nav > ul {
-        flex-wrap: wrap;
+
+    .nav a:not(:first-child) {display: none;}
+    .nav a.icon {
+        float: right;
+        display: block;
     }
-    nav > ul > li {
-        flex-basis: 100%
+}
+
+    /* with a little JS in the html, we display the rest of the
+    menu items in a column by injecting a new class */
+@media screen and (max-width: 646px) {
+    .nav.responsive {position: relative;}
+    .nav.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
     }
-    nav > ul > li > a {
-        padding-top: 13px;
-        padding-bottom: 13px;
+    .nav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
     }
 }
 
@@ -196,4 +201,7 @@ footer {
     padding: 0.8rem;
     text-align: center;
     font-size: 0.8rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
